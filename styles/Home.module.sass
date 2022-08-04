@@ -16,10 +16,43 @@
   height: 440px
   background: #FFFEFB
   box-shadow: 0px 20px 30px rgba(0, 0, 0, 0.04), 0px 6px 10px rgba(0, 0, 0, 0.02)
-  padding: 24px
+  padding: 16px 24px
   border-radius: 4px
   display: flex
   flex-direction: column
+
+  input
+    color: red
+
+    ::placeholder
+      color: #B4B4B4
+
+  textarea
+    font-family: Source Sans Pro, sans-serif
+    resize: none
+    border: none
+    padding: 10px 16px
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1)
+    background: #FFFEFB
+    border-radius: 4px
+    height: 108px
+
+    ::placeholder
+      color: #B4B4B4
+
+    &:focus
+      outline: none
+
+  .form__name__input
+    margin: 8px 0
+    display: flex
+    flex-direction: column
+
+  .form__description__input
+    margin: 8px 0
+    display: flex
+    flex-direction: column
+
 
   .form__input__label
     font-family: 'Source Sans Pro', sans-serif
@@ -29,6 +62,7 @@
     line-height: 13px
     letter-spacing: -0.02em
     color: #49485E
+    margin-bottom: 4px
 
 
 .cards__container

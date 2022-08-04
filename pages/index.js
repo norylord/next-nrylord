@@ -9,8 +9,22 @@ export default function Home() {
             <h1 className={styles.title}>Добавление товара</h1>
             <div className={styles.main__container}>
                 <div className={styles.form__container}>
-                    <label htmlFor="" className={styles.form__input__label}>Название товара</label>
-                    <Input name='cardName' placeholder='Введите наименование товара'/>
+                    <div className={styles.form__name__input}>
+                        <label htmlFor="cardName" className={styles.form__input__label}>Название товара</label>
+                        <Input name='cardName' placeholder='Введите наименование товара' id='cardName'/>
+                    </div>
+                    <div className={styles.form__description__input}>
+                        <label htmlFor="cardName" className={styles.form__input__label}>Название товара</label>
+                        <textarea placeholder='Введите описание товара'/>
+                    </div>
+                    <div className={styles.form__name__input}>
+                        <label htmlFor="cardName" className={styles.form__input__label}>Название товара</label>
+                        <Input name='cardName' placeholder='Введите наименование товара' id='cardName'/>
+                    </div>
+                    <div className={styles.form__name__input}>
+                        <label htmlFor="cardName" className={styles.form__input__label}>Название товара</label>
+                        <Input name='cardName' placeholder='Введите наименование товара' id='cardName'/>
+                    </div>
                 </div>
                 <div className={styles.cards__container}></div>
             </div>
