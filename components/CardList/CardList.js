@@ -1,9 +1,10 @@
 import styles from './CardList.module.sass'
 import Card from "../Card/Card";
-import {useEffect, useState} from "react";
-import RequestService from "../../services/cards/RequestService";
+import {useContext} from "react";
+import {CardsContext} from "../../context/Cards";
 
-const CardList = ({cards}) => {
+const CardList = () => {
+    const {cards} = useContext(CardsContext)
 
     return (
         <div className={styles.card__list}>
@@ -16,6 +17,7 @@ const CardList = ({cards}) => {
                         desc={card.description}
                         image={card.image}
                         currency={card.currency}
+                        id={card.id}
                     />)
                 : <h1>Данные загружаются</h1>}
         </div>

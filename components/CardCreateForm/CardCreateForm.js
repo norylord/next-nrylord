@@ -1,24 +1,27 @@
 import styles from "./CardCreateForm.module.sass";
 import Input from "../UI/Input/Input";
 import Button from "../UI/Button/Button";
-import {useEffect, useState} from "react";
+import {useContext, useEffect, useState} from "react";
+import {CardsContext} from "../../context/Cards";
 
-
-const CardCreateForm = ({cards, setCards}) => {
+const CardCreateForm = () => {
 
     const [name, setName] = useState('')
     const [desc, setDesc] = useState('')
     const [image, setImage] = useState('')
     const [price, setPrice] = useState()
 
+    const {cardsActions} = useContext(CardsContext)
 
     const createCard = (e, name, desc, image, price) => {
         const date = new Date()
         e.preventDefault();
+
+
         const newCard = {
             id: date.getTime(),
-            name: name,
-            desc: desc,
+            title: name,
+            description: desc,
             image: image,
             price: price,
             currency: 'RUB'
@@ -27,7 +30,7 @@ const CardCreateForm = ({cards, setCards}) => {
         setDesc('')
         setImage('')
         setPrice('')
-        setCards([...cards, newCard])
+        cardsActions.addCard(newCard)
     }
 
     return (
