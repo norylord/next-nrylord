@@ -3,7 +3,7 @@ import Input from "../UI/Input/Input";
 import Button from "../UI/Button/Button";
 import {useContext, useEffect, useState} from "react";
 import {CardsContext} from "../../context/Cards";
-import {Form, Formik, Field, ErrorMessage, useFormik} from "formik";
+import {useFormik} from "formik";
 import * as Yup from "yup";
 import TextArea from "../UI/TextArea/TextArea";
 
@@ -71,7 +71,8 @@ const CardCreateForm = () => {
             <div className={styles.form__input}>
                 <label htmlFor="cardImage" className={styles.form__input__label}>Ссылка на изображение
                     товара</label>
-                <Input name='cardImage' placeholder='Введите ссылку' id='cardImage' value={values.cardImage}
+                <Input name='cardImage' placeholder='Введите ссылку' id='cardImage'
+                       value={values.cardImage}
                        onChange={handleChange} touched={touched.cardImage} onBlur={handleBlur}
                        errorEnterData={errors.cardImage && touched.cardImage}
                 />
