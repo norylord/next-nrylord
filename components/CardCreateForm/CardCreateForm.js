@@ -1,7 +1,7 @@
 import styles from "./CardCreateForm.module.sass";
 import Input from "../UI/Input/Input";
 import Button from "../UI/Button/Button";
-import {useContext, useEffect, useState} from "react";
+import {useContext} from "react";
 import {CardsContext} from "../../context/Cards";
 import {useFormik} from "formik";
 import * as Yup from "yup";
@@ -50,15 +50,18 @@ const CardCreateForm = () => {
         }
     )
 
-    console.log(errors)
     return (
         <form className={styles.form__container} autoComplete='off' onSubmit={handleSubmit}>
             <div className={styles.form__input}>
-                <label htmlFor="cardName" className={styles.form__input__label}>Название товара</label>
+                <label htmlFor="cardName" className={styles.form__input__label}>Название товара<span
+                    style={{color: '#FF8484', fontSize: '12px'}}>*</span></label>
                 <Input onChange={handleChange} name='cardName'
                        placeholder='Введите наименование товара' id='cardName' value={values.cardName}
                        errorEnterData={errors.cardName && touched.cardName} onBlur={handleBlur}
                 />
+                <div
+                    className={styles.form__error_message}>{errors.cardName && touched.cardName ?
+                    <p>Поле является обязательным</p> : <p>&nbsp;</p>}</div>
             </div>
             <div className={styles.form__description__input}>
                 <label htmlFor="cardDescription" className={styles.form__input__label}>Описание товара</label>
@@ -70,22 +73,29 @@ const CardCreateForm = () => {
             </div>
             <div className={styles.form__input}>
                 <label htmlFor="cardImage" className={styles.form__input__label}>Ссылка на изображение
-                    товара</label>
+                    товара <span style={{color: '#FF8484', fontSize: '12px'}}>*</span></label>
                 <Input name='cardImage' placeholder='Введите ссылку' id='cardImage'
                        value={values.cardImage}
                        onChange={handleChange} touched={touched.cardImage} onBlur={handleBlur}
                        errorEnterData={errors.cardImage && touched.cardImage}
                 />
+                <div className={styles.form__error_message}>{errors.cardImage && touched.cardImage ?
+                    <p>Поле является обязательным</p> : <p>&nbsp;</p>}</div>
             </div>
             <div className={styles.form__input}>
-                <label htmlFor="cardPrice" className={styles.form__input__label}>Цена товара</label>
+                <label htmlFor="cardPrice" className={styles.form__input__label}>Цена товара<span
+                    style={{color: '#FF8484', fontSize: '12px'}}>*</span></label>
                 <Input type="number" name='cardPrice' placeholder='Введите цену' id='cardPrice'
                        value={values.cardPrice} onChange={handleChange} errors={errors.cardPrice}
                        touched={touched.cardPrice} onBlur={handleBlur}
                        errorEnterData={errors.cardPrice && touched.cardPrice}
                 />
+                <div className={styles.form__error_message}>{errors.cardPrice && touched.cardPrice ?
+                    <p>Поле является обязательным</p> : <p>&nbsp;</p>}</div>
             </div>
-            <Button disabled={Object.keys(errors).length !== 0} type="submit" title={'Добавить товар'}/>
+
+            <Button disabled={Object.keys(errors).length !== 0 && Object.keys(errors).length !== undefined}
+                    type="submit" title={'Добавить товар'}/>
         </form>
     );
 };
