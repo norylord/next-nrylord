@@ -32,7 +32,7 @@ const CardCreateForm = () => {
         cardName: Yup.string().min(3, 'Введите минимум 3 символа').max(50, 'Максимум 50 симоволов').required('Поле обязательно для ввода'),
         cardDescription: Yup.string(),
         cardImage: Yup.string().required('Поле обязательно для ввода'),
-        cardPrice: Yup.number().positive('Введите положительное значение').integer('Введите целое значение').required('Поле обязательно для ввода')
+        cardPrice: Yup.number().typeError('Введите целое значение').positive('Введите положительное значение').integer('Введите целое значение').required('Поле обязательно для ввода')
     })
 
     const initialValues = {

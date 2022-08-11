@@ -14,6 +14,7 @@ export const CardsProvider = ({children}) => {
             setCards(localStorageCardsData)
         } else {
             localStorage.setItem('cards', JSON.stringify(RequestService.getCards()))
+            setCards(JSON.parse(localStorage.getItem('cards')))
         }
     }, [])
 
