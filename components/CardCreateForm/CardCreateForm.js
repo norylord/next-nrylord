@@ -3,7 +3,7 @@ import Input from "../UI/Input/Input";
 import Button from "../UI/Button/Button";
 import {useContext} from "react";
 import {CardsContext} from "../../context/Cards";
-import {useFormik} from "formik";
+import {ErrorMessage, Field, useFormik} from "formik";
 import * as Yup from "yup";
 import TextArea from "../UI/TextArea/TextArea";
 
@@ -29,10 +29,10 @@ const CardCreateForm = () => {
 
     const urlReg = /((https?):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/
     const validationSchema = Yup.object().shape({
-        cardName: Yup.string().min(3).required('Поле обязательно для ввода'),
+        cardName: Yup.string().min(3, 'Введите минимум 3 символа').max(50, 'Максимум 50 симоволов').required('Поле обязательно для ввода'),
         cardDescription: Yup.string(),
         cardImage: Yup.string().required('Поле обязательно для ввода'),
-        cardPrice: Yup.number().positive().integer().required('Поле обязательно для ввода')
+        cardPrice: Yup.number().positive('Введите положительное значение').integer('Введите целое значение').required('Поле обязательно для ввода')
     })
 
     const initialValues = {
@@ -42,7 +42,7 @@ const CardCreateForm = () => {
         cardPrice: '',
     }
 
-    const {values, errors, touched, handleChange, handleBlur, handleSubmit, isSubmitting} = useFormik(
+    const {values, errors, touched, handleChange, handleBlur, handleSubmit, isSubmitting, isValid} = useFormik(
         {
             initialValues: initialValues,
             validationSchema: validationSchema,
@@ -50,6 +50,7 @@ const CardCreateForm = () => {
         }
     )
 
+    console.log()
     return (
         <form className={styles.form__container} autoComplete='off' onSubmit={handleSubmit}>
             <div className={styles.form__input}>
@@ -60,8 +61,12 @@ const CardCreateForm = () => {
                        errorEnterData={errors.cardName && touched.cardName} onBlur={handleBlur}
                 />
                 <div
-                    className={styles.form__error_message}>{errors.cardName && touched.cardName ?
-                    <p>Поле является обязательным</p> : <p>&nbsp;</p>}</div>
+                    className={styles.form__error_message}>
+                    {errors.cardName && touched.cardName ?
+                        <p>{errors.cardName}</p>
+                        : <p>&nbsp;</p>
+                    }
+                </div>
             </div>
             <div className={styles.form__description__input}>
                 <label htmlFor="cardDescription" className={styles.form__input__label}>Описание товара</label>
@@ -80,7 +85,7 @@ const CardCreateForm = () => {
                        errorEnterData={errors.cardImage && touched.cardImage}
                 />
                 <div className={styles.form__error_message}>{errors.cardImage && touched.cardImage ?
-                    <p>Поле является обязательным</p> : <p>&nbsp;</p>}</div>
+                    <p>{errors.cardImage}</p> : <p>&nbsp;</p>}</div>
             </div>
             <div className={styles.form__input}>
                 <label htmlFor="cardPrice" className={styles.form__input__label}>Цена товара<span
@@ -91,10 +96,10 @@ const CardCreateForm = () => {
                        errorEnterData={errors.cardPrice && touched.cardPrice}
                 />
                 <div className={styles.form__error_message}>{errors.cardPrice && touched.cardPrice ?
-                    <p>Поле является обязательным</p> : <p>&nbsp;</p>}</div>
+                    <p>{errors.cardPrice}</p> : <p>&nbsp;</p>}</div>
             </div>
 
-            <Button disabled={Object.keys(errors).length !== 0 && Object.keys(errors).length !== undefined}
+            <Button disabled={!isValid}
                     type="submit" title={'Добавить товар'}/>
         </form>
     );
