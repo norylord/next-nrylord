@@ -1,6 +1,7 @@
 import styles from './Card.module.sass'
 import {CardsContext} from "../../context/Cards";
 import {useContext} from "react";
+import {BsTrashFill} from 'react-icons/bs'
 
 const Card = ({title, image, desc, price, currency, id}) => {
     const cardClass = styles.card
@@ -32,16 +33,18 @@ const Card = ({title, image, desc, price, currency, id}) => {
 
     return (
         <div className={cardClass}>
+
             {
                 checkForImage(image)
             }
+
             <div className={bodyClass}>
                 <p className={titleClass}>{title}</p>
                 <p className={descClass}>{desc}</p>
                 <p className={priceClass}>{cardPrice}</p>
-                <button onClick={() => cardsActions.removeCard(id)}>Удалить</button>
-
             </div>
+            <button className={styles.button__delete} onClick={() => cardsActions.removeCard(id)}><BsTrashFill
+                color={'#fff'} size={18}/></button>
         </div>
     );
 };
