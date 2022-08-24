@@ -42,7 +42,7 @@ const CardCreateForm = () => {
         cardPrice: '',
     }
 
-    const {values, errors, touched, handleChange, handleBlur, handleSubmit, isSubmitting, isValid} = useFormik(
+    const {values, errors, touched, handleChange, handleBlur, handleSubmit, isSubmitting, isValid, dirty} = useFormik(
         {
             initialValues: initialValues,
             validationSchema: validationSchema,
@@ -99,7 +99,7 @@ const CardCreateForm = () => {
                     <p>{errors.cardPrice}</p> : <p>&nbsp;</p>}</div>
             </div>
 
-            <Button disabled={!isValid}
+            <Button disabled={!(isValid && dirty)}
                     type="submit" title={'Добавить товар'}/>
         </form>
     );

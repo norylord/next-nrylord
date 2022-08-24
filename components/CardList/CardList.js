@@ -5,6 +5,7 @@ import {CardsContext} from "../../context/Cards";
 
 const CardList = () => {
     const {cards} = useContext(CardsContext)
+    if (cards.length === 0) return <h1>Список пуст</h1>
 
     return (
         <div className={styles.card__list}>

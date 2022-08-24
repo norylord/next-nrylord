@@ -1,6 +1,8 @@
 .card__list
   display: grid
-  grid: repeat(1, 1fr) / repeat(3, 332px)
+  grid: repeat(3, 423px) / repeat(3, 332px)
   gap: 16px
+  @media (max-width: 1340px)
+    grid: 1fr 1fr  / repeat(2, 332px)
   @media (max-width: 1000px)
-    grid: 1fr 1fr / 1fr 1fr
+    grid: 1fr  / 1fr
