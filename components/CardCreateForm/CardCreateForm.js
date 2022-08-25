@@ -50,7 +50,15 @@ const CardCreateForm = () => {
         }
     )
 
-    console.log()
+    const checkForNumber = e => {
+        e.preventDefault();
+        const {value} = e.target;
+        const regex = new RegExp('/\d/gi');
+        if (regex.test(value.toString())) {
+            value.match(regex) && handleChange(e)
+        }
+    }
+    
     return (
         <form className={styles.form__container} autoComplete='off' onSubmit={handleSubmit}>
             <div className={styles.form__input}>
@@ -90,10 +98,17 @@ const CardCreateForm = () => {
             <div className={styles.form__input}>
                 <label htmlFor="cardPrice" className={styles.form__input__label}>Цена товара<span
                     style={{color: '#FF8484', fontSize: '12px'}}>*</span></label>
-                <Input type="number" name='cardPrice' placeholder='Введите цену' id='cardPrice'
-                       value={values.cardPrice} onChange={handleChange} errors={errors.cardPrice}
-                       touched={touched.cardPrice} onBlur={handleBlur}
-                       errorEnterData={errors.cardPrice && touched.cardPrice}
+                <Input
+                    name='cardPrice'
+                    placeholder='Введите цену'
+                    id='cardPrice'
+                    value={values.cardPrice}
+                    onChange={e => {
+                        checkForNumber(e)
+                    }}
+                    errors={errors.cardPrice}
+                    touched={touched.cardPrice} onBlur={handleBlur}
+                    errorEnterData={errors.cardPrice && touched.cardPrice}
                 />
                 <div className={styles.form__error_message}>{errors.cardPrice && touched.cardPrice ?
                     <p>{errors.cardPrice}</p> : <p>&nbsp;</p>}</div>
